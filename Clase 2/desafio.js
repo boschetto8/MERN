@@ -1,8 +1,8 @@
 class Usuario  {
     constructor (nombre, apellido, libros, mascotas){
-        this.nombre = nombre,
-        this.apellido = apellido,
-        this.libros = libros,
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.libros = libros;
         this.mascotas = mascotas
     }
     getFullname(){
@@ -19,9 +19,10 @@ class Usuario  {
         this.libros.push({'nombre': nombre, 'autor': autor})
     }
     getBookNames(){
-          librosNombre = this.libros.map((libro)=>{
+         const librosNombre = this.libros.map((libro)=>{
             return libro.nombre
         })
+        return librosNombre
     }
 
 
@@ -29,7 +30,7 @@ class Usuario  {
 
 const user = new Usuario ('Juan', 'Gomez', [{'nombre':'2666','autor':'Roberto Bolaño'}], ['Titan', 'Norma'])
 const user2 = new Usuario ('Macarena', 'Elissamburu', [{'nombre':'El principito','autor':'Saint-Exupery'},{'nombre':'Mi planta de naranja Lima','autor':'Vasconcelos'}], ['Fermin'])
-let librosNombre;
+
 
 console.log (user)
 console.log(user.getFullname())
@@ -43,10 +44,9 @@ user.addBook('Las venas abiertas de america Latina', 'Galeano')
 
 console.log ('Libro agregados',user);
 
-user2.getBookNames()
-console.log ('array de libros', librosNombre)
+console.log ('array de libros user', user.getBookNames())
 
 
-user.getBookNames()
-console.log ('array de libros', librosNombre)
+console.log ('array de libros user2', user2.getBookNames())
+
 
