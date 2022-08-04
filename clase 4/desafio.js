@@ -67,6 +67,7 @@ class Contenedor {
             }
         } catch (error) {
             return 'No se pudo eliminar'
+
         }
 
 
@@ -90,7 +91,7 @@ console.log(await producto.save({"title": "Guantes de arquero","price": 14000, "
 console.log('todos los productos',await producto.getAll());
 console.log('id buscado', await producto.getById(3));
 console.log('producto borrado', await producto.deleteById(1));
-//console.log('todos los productos borrados',await producto.deleteAll())
+console.log('todos los productos borrados',await producto.deleteAll())
 };
 
 ejecutar()
