@@ -35,7 +35,8 @@ class Contenedor {
 
 
         } catch (error) {
-           console.log('Mensaje error');
+            throw new Error (`Error al guardar: ${error}`);
+            
         }
 
 
@@ -45,11 +46,17 @@ class Contenedor {
         try {
             const objs = await this.getAll();
             
-            const idBuscado = objs.findIndex((p) => p.id == id)
-            return objs[idBuscado]
+            const idBuscado = objs.findIndex((p) => p.id == id);
+            if (idBuscado ==-1){
+                throw new Error (`el ID buscado ${id} no existe`)
+            }
+            else {
+                return objs[idBuscado]
+            }
+            
                        
         } catch (error) {
-            console.log('No se pudo encontrar')
+            throw new Error (`No se pudo encontrar el id: ${error}`)
         }
     }
 
@@ -60,13 +67,15 @@ class Contenedor {
             const objs = await this.getAll();
             const idBuscado = objs.findIndex((p)=> p.id == id);
                 if (idBuscado == -1) {
-                return 'ID Inexistente'
+                    throw new Error (`el ID buscado ${id} no existe por lo que no se puede eliminar`)
             } else {
                 objs.splice(idBuscado, 1);
                 await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2)); 
             }
         } catch (error) {
-            return 'No se pudo eliminar'
+            
+            throw new Error (`No se pudo eliminar el id: ${error}`)
+            
 
         }
 
@@ -74,10 +83,9 @@ class Contenedor {
     }
     async deleteAll(){
         try {
-            let objs = []
-            await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2)); 
+             await fs.writeFile(this.ruta, JSON.stringify([], null, 2)); 
         } catch (error) {
-            return 'No se pueden borrar los archivos'
+           throw new Error (`No se pudo eliminar los arcihvos ${error}`)
         }
     }
 }
